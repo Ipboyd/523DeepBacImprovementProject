@@ -9,3 +9,5 @@ This effort is an update on the 2022 DeepBacs paper, specifically in regards to 
 -11/19/2024 - Added Transformer framework Class (Omar)
 
 -11/20/2024 - Added Generalist StarDist2D model after re-analyizing it performance on DeepBac's reported results. Added Data used in generalist model under "Data" (IB)
+
+-11/20/2024 - Added the CNN framework class (Mohi)
