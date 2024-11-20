@@ -1,4 +1,8 @@
-ChangeLog:
+**INTRODUCTION:**
+This effort is an update on the 2022 DeepBacs paper, specifically in regards to improving cell recall in dense, high contrast reagions. Data used in this effort can be found in the Data folder and is labeld by the figures in the original DeepBacs paper. In this work we employ a Convolutional Neural network (CNN) for pre-task training in order to create sets of features that we can use for further training. Our segmentation model is a transformer that uses the pre-task representation and the original image in order to segement the image. Our target metric is to improve upon StarDist2D's generalist model's recall or more genearlly imrpove upon the methodologies used in DeepBacs to segement cells ebtter in high contrast, densely populated environments.
+
+
+**ChangeLog:**
 
 -10/10/2024 - Uploaded StarDist Demo (cited in propsal) --> Using this as intial anlysis and a place to start imroving classification preformance (IB)
 
