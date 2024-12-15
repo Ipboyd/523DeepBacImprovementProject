@@ -15,3 +15,7 @@ This effort is an update on the 2022 DeepBacs paper, specifically in regards to 
 -12/06/2024 - Added pretrained resnet for CNN (Mohi/Berk)
 
 -12/07/2024 - Added v1 of transformer (Isaac/Omar)
+
+-12/07 -> 12/15 - Added several different version of transoformer (Everyone)
+
+-12/15/2024 - Finilized model selection and cleaned Github (Everyone)
