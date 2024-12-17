@@ -38,6 +38,6 @@ In order to get the results from teh augmented dataset addition please use the s
 
 -12/07/2024 - Added v1 of transformer (Isaac/Omar)
 
--12/07 -> 12/15 - Added several different version of transoformer (Everyone)
+-12/07 -> 12/15 - Added several different version of transformer (Everyone)
 
 -12/15/2024 - Finalized model selection and cleaned Github (Everyone)
