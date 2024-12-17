@@ -34,6 +34,61 @@ def augment_images_in_folder(image_folder_path, mask_folder_path, density_factor
             mask_file = image_file  # Assuming mask files have the same name as image files
             original_image_path = os.path.join(image_folder_path, image_file)
             mask_image_path = os.path.join(mask_folder_path, mask_file)
+            
+            for i in range(9):
+                seed_num = i
+                original_image_rgb, mask_image_rgb, final_image, final_mask = process_images(
+                    original_image_path,
+                    mask_image_path,
+                    visualize_individual=False,
+                    display_plots=True,
+                    density_factor=density_factor,
+                    seed_num = seed_num,
+                )
+
+                if final_image is not None and final_mask is not None:
+                    augmented_image_path = os.path.join(augmented_image_folder, f'augmented_{seed_num}_{image_file}')
+                    augmented_mask_path = os.path.join(augmented_mask_folder, f'augmented_{seed_num}_{mask_file}')
+
+                    cv2.imwrite(augmented_image_path, cv2.cvtColor(final_image, cv2.COLOR_RGB2BGR))
+                    cv2.imwrite(augmented_mask_path, cv2.cvtColor(final_mask, cv2.COLOR_RGB2BGR))
+
+                    augmentation_info.append({
+                        "original_image": original_image_path,
+                        "mask": mask_image_path,
+                        "augmented_image": augmented_image_path,
+                        "augmented_mask": augmented_mask_path,
+                        "density_factor": density_factor
+                    })
+
+    info_df = pd.DataFrame(augmentation_info)
+    info_df.to_csv(os.path.join(output_folder_path, 'augmentation_info.csv'), index=False)
+
+def augment_images_in_folder_with_dens(image_folder_path, mask_folder_path, density_factor, output_folder_path = None):
+    if not output_folder_path:
+        output_folder_path = os.path.dirname(image_folder_path)
+        
+    # Create main output folder
+    if not os.path.exists(output_folder_path):
+        os.makedirs(output_folder_path)
+    
+
+    # Create separate folders for augmented images and masks
+    augmented_image_folder = os.path.join(output_folder_path, f'augmented_{os.path.basename(image_folder_path)}_dens_{density_factor}')
+    augmented_mask_folder = os.path.join(output_folder_path, f'augmented_{os.path.basename(mask_folder_path)}_dens_{density_factor}')
+    
+    os.makedirs(augmented_image_folder, exist_ok=True)
+    os.makedirs(augmented_mask_folder, exist_ok=True)
+
+    augmentation_info = []
+    image_files = [f for f in os.listdir(image_folder_path) if f.endswith(('tif','.png', '.jpg', '.jpeg'))]
+    
+    for image_file in image_files:
+        patterns = ['001', '002', '__'] # Since they are already dense we don't want to deal with them
+        if not any(pattern in image_file for pattern in patterns):
+            mask_file = image_file  # Assuming mask files have the same name as image files
+            original_image_path = os.path.join(image_folder_path, image_file)
+            mask_image_path = os.path.join(mask_folder_path, mask_file)
 
             original_image_rgb, mask_image_rgb, final_image, final_mask = process_images(
                 original_image_path,
@@ -139,7 +194,6 @@ def visualize_individual_bacteria(bacteria_dict):
 
 # Define a function to generate distinct colors
 def generate_unique_colors(num_colors):
-    np.random.seed(0)  # For reproducibility
     return np.random.randint(0, 255, size=(num_colors, 3), dtype=np.uint16)
 
 def rotate_and_crop(image, mask, angle):
@@ -174,13 +228,13 @@ def rotate_and_crop(image, mask, angle):
 
     return cropped_rotated_image, cropped_rotated_mask
 
-def process_images(original_image_path, mask_image_path, visualize_individual=False, display_plots=False, density_factor=1):
+def process_images(original_image_path, mask_image_path, visualize_individual=False, display_plots=False, density_factor=1, seed_num=0):
     # Load images
     original_image = cv2.imread(original_image_path)
     mask_image = cv2.imread(mask_image_path)
     
     #print(f"Mask dtype: {mask_image.dtype}, min: {mask_image.min()}, max: {mask_image.max()}")
-
+    np.random.seed(seed_num)  # For reproducibility
 
     if original_image is None or mask_image is None:
         print("Error loading images.")
@@ -198,6 +252,7 @@ def process_images(original_image_path, mask_image_path, visualize_individual=Fa
     dense_bacteria_dict = {}
     for idx, (color, (bacteria_image, bacteria_mask)) in enumerate(bacteria_dict.items()):
         for i in range(density_factor):
+            
             
             # Randomly rotate and crop the bacteria image
             angle = np.random.uniform(-30, 30)  # Random angle between -30 and 30 degrees
