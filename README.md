@@ -17,16 +17,16 @@ Dependencies:
 8. einops
 9. cv2
 
-Our primary results can be seen by running Transformer_with_CNN.ipynb. This notebook trains and tests on S. Aurus dataset stored on the SCC and available at https://doi.org/10.5281/zenodo.5550933. The input is the raw image transformed into grascale and the output are individual instance masks for each bacteria in the image. We also output the sum accross all the instance masks, which is essentially a binary mask between the target objects and the background.
+Our primary results can be seen by running Transformer_with_CNN.ipynb. This notebook trains and tests on S. Aureus dataset stored on the SCC and available at https://doi.org/10.5281/zenodo.5550933. The input is the raw image transformed into grayscale and the output are individual instance masks for each bacteria in the image. We also output the sum accross all the instance masks, which is essentially a binary mask between the target objects and the background.
 
 ![image](https://github.com/user-attachments/assets/b743e9aa-56f0-4233-bd0b-d6e2f4aae666)
 
-In order to get the bounding box results that we used to caclulate recall and count please use TransformerCNN_masks.ipynb. 
+In order to get the bounding box results that we used to calculate recall and count please use TransformerCNN_masks.ipynb. 
 In order to get the results from teh augmented dataset addition please use the script data_augmentation.ipynb
 
 **Work Log:**
 
--10/10/2024 - Uploaded StarDist Demo (cited in propsal) --> Using this as intial anlysis and a place to start imroving classification preformance (Isaac)
+-10/10/2024 - Uploaded StarDist Demo (cited in proposal) --> Using this as intial anlysis and a place to start improving classification performance (Isaac)
 
 -11/19/2024 - Added Transformer framework Class (Omar)
 
@@ -40,4 +40,4 @@ In order to get the results from teh augmented dataset addition please use the s
 
 -12/07 -> 12/15 - Added several different version of transoformer (Everyone)
 
--12/15/2024 - Finilized model selection and cleaned Github (Everyone)
+-12/15/2024 - Finalized model selection and cleaned Github (Everyone)
