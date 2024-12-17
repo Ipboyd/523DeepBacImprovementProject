@@ -17,7 +17,7 @@ Dependencies:
 8. einops
 9. cv2
 
-Our primary results can be seen by running Transformer_with_CNN.ipynb. This notebook trains and tests on S. Aureus dataset stored on the SCC and available at https://doi.org/10.5281/zenodo.5550933. The input is the raw image transformed into grayscale and the output are individual instance masks for each bacteria in the image. We also output the sum accross all the instance masks, which is essentially a binary mask between the target objects and the background.
+Our primary results can be seen by running TransformerCNN_masks.ipynb. This notebook trains and tests on S. Aureus dataset stored on the SCC and available at https://doi.org/10.5281/zenodo.5550933. The input is the raw image transformed into grayscale and the output are individual instance masks for each bacteria in the image. We also output the sum accross all the instance masks, which is essentially a binary mask between the target objects and the background.
 
 ![image](https://github.com/user-attachments/assets/b743e9aa-56f0-4233-bd0b-d6e2f4aae666)
 
