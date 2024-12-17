@@ -1,43 +1,74 @@
-**INTRODUCTION:**
-This effort is an update on the 2022 DeepBacs paper, specifically in regards to improving cell recall in dense, high contrast reagions. Data used in this effort can be found in the Data folder and is labeld by the figures in the original DeepBacs paper. In this work we employ a Convolutional Neural network (CNN) for pre-task training in order to create sets of features that we can use for further training. Our segmentation model is a transformer that uses the pre-task representation and the original image in order to segement the image. Our target metric is to improve upon StarDist2D's generalist model's recall or more genearlly imrpove upon the methodologies used in DeepBacs to segement cells better in high contrast, densely populated environments.
+# 🧬 **Computer Vision for Bacteria Counting**
 
+## 🚀 **Introduction**  
+This project is an extension of the **2022 DeepBacs paper**, focusing on enhancing **cell recall** in dense, high-contrast regions. Our approach combines advanced deep learning methodologies to address the challenges posed in densely populated, high-contrast images.
 
+### Key Highlights:
+- **Data**: Available in the `Data` folder on SCC, labeled according to figures in the original DeepBacs paper.  
+- **Approach**:
+  - Pre-task training with a **Convolutional Neural Network (CNN)** to extract feature representations.
+  - A **Transformer-based segmentation model** that utilizes the pre-task CNN features and the original grayscale image to produce precise segmentations.
+- **Goal**: Improve upon **StarDist2D's generalist model** and the methodologies in DeepBacs for segmenting cells in challenging environments.
 
-**Instructions:**
-In order to corroborate our primary results, one should only have to install the dependencies and then run the respective ipynb scripts. In order to install dependences please use !pip insall {library} in order to do so in your terminal
+---
 
-Dependencies:
-1. numpy
-2. matlplotlib
-3. random
-4. skimage
-5. torch
-6. PIL
-7. os
-8. einops
-9. cv2
+## 🛠️ **Setup Instructions**
 
-Our primary results can be seen by running TransformerCNN_masks.ipynb. This notebook trains and tests on S. Aureus dataset stored on the SCC and available at https://doi.org/10.5281/zenodo.5550933. The input is the raw image transformed into grayscale and the output are individual instance masks for each bacteria in the image. We also output the sum accross all the instance masks, which is essentially a binary mask between the target objects and the background.
+### 1. **Dependencies**  
+Ensure the following libraries are installed:  
+```bash
+!pip install numpy matplotlib random scikit-image torch pillow einops opencv-python
+```
+Alternatively, list them in a requirements file:
+```bash
+pip install -r requirements.txt
+```
 
-![image](https://github.com/user-attachments/assets/b743e9aa-56f0-4233-bd0b-d6e2f4aae666)
+### 2. **Primary Results**  
+To reproduce our results, follow these steps:  
+- **Run the Transformer-CNN pipeline**:
+   ```bash
+   jupyter notebook TransformerCNN_masks.ipynb
+   ```
+   - **Input**: Raw grayscale images of *S. Aureus* dataset (available at [Zenodo](https://doi.org/10.5281/zenodo.5550933)).  
+   - **Output**: 
+     - Individual instance masks for each bacterium.  
+     - Combined binary masks (sum across all instance masks).  
 
-In order to get the bounding box results that we used to calculate recall and count please use TransformerCNN_masks.ipynb. 
-In order to get the results from the augmented dataset addition please use the script data_augmentation.ipynb
+- **Augmented Dataset Analysis**:  
+   ```bash
+   jupyter notebook Augmented_training_pipeline.ipynb
+   ```
 
-**Work Log:**
+### 3. **Output Example**  
+Below is an example of the segmentation output, showcasing individual bacterial masks:
 
--10/10/2024 - Uploaded StarDist Demo (cited in proposal) --> Using this as intial anlysis and a place to start improving classification performance (Isaac)
+![Segmentation Example](https://github.com/user-attachments/assets/b743e9aa-56f0-4233-bd0b-d6e2f4aae666)
 
--11/19/2024 - Added Transformer framework Class (Omar)
+---
 
--11/20/2024 - Added Generalist StarDist2D model after re-analyizing it performance on DeepBac's reported results. Added Data used in generalist model under "Data" (Isaac)
+## 📊 **Work Log**
 
--11/20/2024 - Added the CNN framework class (Mohi)
+| **Date**       | **Task**                                                                                          | **Contributor(s)**       |
+|-----------------|--------------------------------------------------------------------------------------------------|--------------------------|
+| 10/10/2024     | Uploaded StarDist demo for initial analysis.                                                     | Isaac                    |
+| 11/19/2024     | Added Transformer framework class.                                                               | Omar                     |
+| 11/20/2024     | Integrated StarDist2D generalist model and updated the `Data` folder.                            | Isaac                    |
+| 11/20/2024     | Added CNN framework class.                                                                       | Mohi                     |
+| 12/06/2024     | Integrated pre-trained ResNet for CNN features.                                                  | Mohi / Berk              |
+| 12/07/2024     | Initial version of the Transformer-based model.                                                  | Isaac / Omar             |
+| 12/07 → 12/15  | Developed multiple Transformer model variations.                                                 | Everyone              |
+| 12/15/2024     | Finalized model selection, cleaned GitHub structure, and organized main notebooks into folders.  | Everyone                 |
 
--12/06/2024 - Added pretrained resnet for CNN (Mohi/Berk)
+---
 
--12/07/2024 - Added v1 of transformer (Isaac/Omar)
+## 🧪 **Results Summary**  
+- **Target Metric**: Improved recall compared to StarDist2D.  
+- **Approach**: Transformer + CNN pre-task framework.  
+- **Key Focus**: Dense, high-contrast regions with challenging segmentation cases.  
 
--12/07 -> 12/15 - Added several different version of transformer (Everyone)
+---
 
--12/15/2024 - Finalized model selection and cleaned Github (Everyone)
+🌟 **For any questions, please feel free to contact our team or refer to the detailed notebooks in the `Notebooks` folder.**
+
+---
