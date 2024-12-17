@@ -22,7 +22,7 @@ Our primary results can be seen by running Transformer_with_CNN.ipynb. This note
 ![image](https://github.com/user-attachments/assets/b743e9aa-56f0-4233-bd0b-d6e2f4aae666)
 
 In order to get the bounding box results that we used to calculate recall and count please use TransformerCNN_masks.ipynb. 
-In order to get the results from teh augmented dataset addition please use the script data_augmentation.ipynb
+In order to get the results from the augmented dataset addition please use the script data_augmentation.ipynb
 
 **Work Log:**
 
